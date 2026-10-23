@@ -1,0 +1,1812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eileen Phan's Portfolio</title>
+<meta name="description" content="Portfolio of college projects, internships, and more.">
+
+<!-- ============================================================
+  HOW TO USE THIS FILE
+  1. Replace "Your Name" everywhere (search for it) with your name.
+  2. Fill in the PROJECT, INTERNSHIP, and SKILLS sections below —
+     each block is clearly marked with EDIT ME comments.
+  3. Replace image src="..." placeholders with your own images.
+     Put images in an /images folder next to this file and point
+     to them, e.g. src="images/project-01.png"
+  4. Update the links (GitHub, LinkedIn, email, resume) in the
+     hero and footer.
+  5. To publish: push this file (named index.html) to a repo
+     called <yourusername>.github.io, or enable GitHub Pages on
+     any repo under Settings → Pages.
+  6. Project pictures: each project has a row of <div class="slide"> blocks.
+     Add or remove slides to change how many pictures can be swiped through.
+  7. "Read More" pop-ups: the text and pictures for each pop-up live inside
+     the <template class="more"> block at the end of each project.
+============================================================= -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700&family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --paper:#f1f4f3;
+    --ink:#16202b;
+    --ink-soft:#54616d;
+    --line:#d7dedf;
+    --accent-teal:#1e5c8c;
+    --accent-coral:#b5721a;
+    --navy:#0b2545;
+    --card-bg:#ffffff;
+    --plate:#e7ecee;
+    --radius:2px;
+    --max:1040px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth; scrollbar-gutter:stable;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--accent-teal); color:#fff;}
+
+  h1,h2,h3{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+
+  a{color:var(--accent-teal); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--accent-teal); outline-offset:3px;}
+
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- SCROLL PROGRESS BAR ---------- */
+  #pressure-bar{
+    position:fixed; top:0; left:0; right:0; height:4px;
+    background:var(--line);
+    z-index:60;
+  }
+  #pressure-bar::after{
+    content:"";
+    display:block; height:100%; width:100%;
+    background:var(--accent-teal);
+    transform:scaleX(var(--scroll, 0));
+    transform-origin:left;
+  }
+
+  /* ---------- NAV ---------- */
+  header.site-nav{
+    position:sticky; top:3px; z-index:50;
+    background:rgba(241,244,243,0.88);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:var(--max); margin:0 auto; padding:16px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .nav-name{
+    font-family:'Space Grotesk', sans-serif; font-size:18px; font-weight:600;
+  }
+  nav.links{display:flex; gap:28px;}
+  nav.links a{
+    color:var(--ink); font-size:14px; font-weight:500;
+  }
+  nav.links a:hover{color:var(--accent-teal); text-decoration:none;}
+  .nav-toggle{display:none; align-items:center; background:none; border:none; padding:4px; cursor:pointer; color:var(--ink);}
+
+  @media (max-width:680px){
+    nav.links{
+      position:absolute; top:100%; left:0; right:0;
+      background:var(--paper); border-bottom:1px solid var(--line);
+      flex-direction:column; padding:16px 28px; gap:16px;
+      display:none;
+    }
+    nav.links.open{display:flex;}
+    .nav-toggle{display:flex;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:96px 0 72px;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:56px;
+    align-items:center;
+  }
+  .hero h1{
+    margin-top:0;
+    font-family:'Fraunces', serif;
+    font-optical-sizing:auto;
+    font-size:clamp(50px, 8vw, 92px);
+    font-weight:500;
+    font-style:italic;
+    line-height:0.92;
+    letter-spacing:-0.01em;
+    color:var(--navy);
+  }
+  .hero h1 .last{
+    display:block;
+  }
+  .hero p.blurb{
+    margin-top:24px;
+    max-width:46ch;
+    color:var(--ink-soft);
+    font-size:17px;
+    line-height:1.65;
+  }
+
+  .hero-stats{
+    list-style:none; margin:28px 0 0; padding:20px 0 0;
+    max-width:46ch;
+    border-top:1px solid var(--line);
+    display:grid; gap:10px;
+  }
+  .hero-stats li{
+    display:flex; align-items:baseline; gap:12px;
+    font-size:14.5px;
+    color:var(--ink-soft);
+  }
+  .hero-stats .num{
+    flex:none; min-width:40px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:15px; font-weight:600;
+    color:var(--navy);
+  }
+
+  .hero-side{display:flex; flex-direction:column; gap:20px;}
+
+  .hero-figure{
+    position:relative;
+    margin:0;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+    background:var(--card-bg);
+  }
+  .hero-figure img{
+    display:block; width:100%; height:100%; object-fit:cover; aspect-ratio:4/5;
+  }
+
+  .info-box{
+    margin:0;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    background:var(--card-bg);
+    padding:18px 20px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+  }
+  .info-box > div{
+    display:grid;
+    grid-template-columns:84px 1fr;
+    gap:10px;
+    padding:6px 0;
+  }
+  .info-box > div + div{border-top:1px solid var(--line);}
+  .info-box dt{color:var(--ink-soft); letter-spacing:0.03em; text-transform:uppercase; font-size:11px;}
+  .info-box dd{margin:0; color:var(--ink); overflow-wrap:anywhere;}
+  .info-box a{color:var(--accent-teal);}
+
+  @media (max-width:780px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero{padding:64px 0 48px;}
+    .hero-side{flex-direction:row; align-items:stretch;}
+    .hero-figure{flex:0 0 40%;}
+    .hero-figure img{aspect-ratio:3/4;}
+    .info-box{flex:1;}
+  }
+  @media (max-width:520px){
+    .hero-side{flex-direction:column;}
+  }
+
+  /* ---------- SECTION HEADERS ---------- */
+  section{padding:72px 0;}
+  section + section{border-top:1px solid var(--line);}
+  .section-head{
+    display:flex; align-items:baseline;
+    margin-bottom:40px;
+    border-bottom:2px solid var(--ink);
+    padding-bottom:12px;
+  }
+  .section-head h2{font-size:27px;}
+
+  /* ---------- PROJECTS ---------- */
+  .project{
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:40px;
+    align-items:start;
+    padding:32px 0;
+  }
+  .project + .project{border-top:1px dashed var(--line);}
+  .project.no-figure{grid-template-columns:1fr;} /* its picture had no file, so the write-up fills the row */
+  .project-figure{
+
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+    background:var(--card-bg);
+  }
+  /* Swipeable picture carousel (native scroll-snap: swipe on touch, trackpad scroll, arrows, dots) */
+  .carousel{position:relative;}
+  .carousel-track{
+    display:flex;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    overscroll-behavior-x:contain;
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+  }
+  .carousel-track::-webkit-scrollbar{display:none;}
+  .carousel-track:focus-visible{outline:2px solid var(--accent-coral); outline-offset:-4px;}
+  .slide{
+    flex:0 0 100%;
+    aspect-ratio:16/10;
+    overflow:hidden;
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
+    background:var(--card-bg);
+  }
+  .slide img,
+  .slide video{
+    display:block; width:100%; height:100%; object-fit:cover;
+    -webkit-user-drag:none;
+  }
+
+  /* Previous / next arrows: shown on hover for mouse users, hidden on touch (swipe instead) */
+  .car-btn{
+    display:none;
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:34px; height:34px; padding:0;
+    place-items:center;
+    background:var(--paper); color:var(--ink);
+    border:1px solid var(--line); border-radius:var(--radius);
+    cursor:pointer;
+  }
+  .car-btn.prev{left:10px;}
+  .car-btn.next{right:10px;}
+  .car-btn:hover{background:var(--accent-teal); color:var(--paper);}
+  @media (hover:hover) and (pointer:fine){
+    .car-btn{display:grid; opacity:0; transition:opacity .15s;}
+    .carousel:hover .car-btn:not(:disabled),
+    .carousel:focus-within .car-btn:not(:disabled){opacity:1;}
+    .car-btn:disabled{pointer-events:none;}
+  }
+
+  .project-figure figcaption{
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--ink-soft);
+    padding:8px 10px;
+    border-top:1px solid var(--line);
+    background:var(--card-bg);
+  }
+  .dots{display:flex; flex:none;}
+  .dot{
+    width:18px; height:18px; padding:0;
+    display:grid; place-items:center;
+    background:none; border:0; cursor:pointer;
+  }
+  .dot::before{
+    content:""; width:7px; height:7px; border-radius:50%;
+    border:1px solid var(--ink); background:transparent;
+  }
+  .dot[aria-current="true"]::before{background:var(--ink);}
+  .dot:focus-visible{outline-offset:0;}
+  @media (max-width:520px){
+    /* reserve two caption lines so the page doesn't jump while swiping */
+    .project-figure.multi figcaption{min-height:52px;}
+  }
+  .project-body .eyebrow{margin-bottom:8px; display:block;}
+  .project-body h3{font-size:22px; margin-bottom:10px;}
+  .project-body p{color:var(--ink-soft); font-size:15px; margin:0 0 14px;}
+  .tags{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+  .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    padding:3px 8px;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    color:var(--ink-soft);
+    background:var(--plate);
+  }
+  .project-links{display:flex; gap:16px;}
+  .project-links a{font-size:14px; font-weight:600;}
+
+  @media (max-width:780px){
+    .project{grid-template-columns:1fr;}
+  }
+
+  /* ---------- INTERNSHIPS ---------- */
+  .role-item{
+    display:grid;
+    grid-template-columns:200px 1fr;
+    gap:24px;
+    padding:24px 0;
+  }
+  .role-item + .role-item{border-top:1px dashed var(--line);}
+  .role-meta{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+  .role-meta .company{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:17px;
+    color:var(--ink);
+    display:block;
+    margin-bottom:4px;
+  }
+  .role-body h3{font-size:18px; margin-bottom:8px; font-weight:600; font-family:'Inter', sans-serif;}
+  .role-body p{color:var(--ink-soft); font-size:15px; margin:0;}
+  .role-body ul{margin:10px 0 0; padding-left:18px; color:var(--ink-soft); font-size:15px;}
+  .role-body li{margin-bottom:6px;}
+  .role-links{display:flex; flex-direction:column; align-items:flex-start; gap:8px; margin-top:14px;}
+
+  @media (max-width:600px){
+    .role-item{grid-template-columns:1fr;}
+  }
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));
+    gap:24px 32px;
+  }
+  @media (max-width:560px){
+    .skills-grid{grid-template-columns:repeat(2, 1fr);}
+  }
+  .skill-group h4{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--accent-teal);
+    margin-bottom:12px;
+  }
+  .skill-group ul{list-style:none; margin:0; padding:0;}
+  .skill-group li{
+    font-size:15px;
+    padding:6px 0;
+    border-bottom:1px solid var(--line);
+    color:var(--ink-soft);
+  }
+
+  /* ---------- EXTRA EXPERIENCE (horizontally scrolling catalog) ---------- */
+  .exp-row{position:relative;}
+  .exp-track{
+    display:flex;
+    gap:24px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    overscroll-behavior-x:contain;
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+    padding:4px 4px 6px;
+    margin:0 -4px;
+  }
+  .exp-track::-webkit-scrollbar{display:none;}
+  .exp-track:focus-visible{outline:2px solid var(--accent-coral); outline-offset:-4px;}
+  .exp-card{
+    flex:0 0 272px;
+    scroll-snap-align:start;
+  }
+  @media (max-width:560px){
+    .exp-card{flex-basis:76vw;}
+  }
+  .exp-cover{
+    display:block; width:100%; margin:0; padding:0;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+    background:var(--card-bg);
+    cursor:pointer;
+  }
+  .exp-cover img{
+    display:block; width:100%; aspect-ratio:4/3; object-fit:cover;
+  }
+  .exp-cover:hover img{opacity:.88;}
+  .exp-caption{padding:14px 2px 0;}
+  .exp-caption .eyebrow{display:block; margin-bottom:6px;}
+  .exp-caption h3{font-size:17px; line-height:1.3;}
+
+  /* arrows for the row, reusing the same look as the project image carousel's */
+  .exp-row .car-btn{top:116px;}
+  @media (max-width:560px){ .exp-row .car-btn{top:96px;} }
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  footer{
+    padding:56px 0 40px;
+    border-top:1px solid var(--line);
+  }
+  footer h2{font-size:26px; margin-bottom:12px;}
+  footer p{color:var(--ink-soft); max-width:50ch;}
+  .footer-links{
+    margin-top:20px;
+    display:flex; gap:22px; flex-wrap:wrap;
+  }
+  .footer-links a{font-size:14px; font-weight:600;}
+  .footer-bottom{
+    margin-top:40px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- READ MORE POP-UP ---------- */
+  .read-more{
+    font:inherit; font-size:14px; font-weight:600;
+    color:var(--accent-teal);
+    background:none; border:0; padding:0; cursor:pointer;
+  }
+  .read-more:hover{text-decoration:underline;}
+
+  .report-link{
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:14px; font-weight:600;
+    color:var(--accent-coral);
+  }
+  .report-link:hover{text-decoration:underline;}
+  .report-link svg{flex:none;}
+
+  html.modal-open,
+  html.lb-open{overflow:hidden;}
+
+  .project-modal{
+    width:min(880px, calc(100% - 32px));
+    max-width:none;
+    max-height:calc(100vh - 48px);
+    max-height:calc(100dvh - 48px);
+    margin:auto; padding:0;
+    background:var(--card-bg); color:var(--ink);
+    border:1px solid var(--line); border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .project-modal[open]{
+    display:flex; flex-direction:column;
+    animation:window-in .18s ease-out;
+  }
+  .project-modal::backdrop{background:rgba(7,7,8,.6);}
+  .project-modal[open]::backdrop{animation:backdrop-in .18s ease-out;}
+  @keyframes window-in{
+    from{opacity:0; transform:translateY(10px) scale(.985);}
+    to{opacity:1; transform:none;}
+  }
+  @keyframes backdrop-in{from{opacity:0;} to{opacity:1;}}
+
+  /* Title bar: a tab on the left, the X on the right */
+  .window-bar{
+    flex:none;
+    display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
+    min-height:52px;
+    padding:0 10px 0 14px;
+    background:var(--card-bg);
+    border-bottom:1px solid var(--line);
+  }
+  .window-tab{
+    min-width:0;
+    padding:9px 18px;
+    margin-bottom:-1px;               /* sits on top of the bar's bottom line so tab and page read as one */
+    background:var(--paper);
+    border:1px solid var(--line); border-bottom:0;
+    border-radius:var(--radius) var(--radius) 0 0;
+    font-family:'Space Grotesk', sans-serif; font-size:16px; font-weight:600; line-height:1.3;
+  }
+  .window-tab span{display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .window-tabs{display:flex; min-width:0; overflow:hidden;}
+  .window-tab.report-tab{
+    display:none;
+    align-items:center; gap:7px;
+    color:var(--accent-teal);
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .window-tab.report-tab:hover{background:var(--card-bg); text-decoration:underline;}
+  .window-tab.report-tab svg{flex:none;}
+  .window-close{
+    flex:none; align-self:center;
+    width:32px; height:32px; padding:0;
+    display:grid; place-items:center;
+    background:var(--paper); color:var(--ink);
+    border:1px solid var(--line); border-radius:var(--radius);
+    cursor:pointer;
+  }
+  .window-close:hover{background:var(--accent-teal); color:var(--paper);}
+
+  .window-body{
+    flex:1; min-height:0;
+    overflow-y:auto; overscroll-behavior:contain;
+    padding:28px 32px 36px;
+  }
+  .window-body > :first-child{margin-top:0;}
+  .window-body p,
+  .window-body ul{
+    max-width:68ch;
+    margin:0 0 16px;
+    color:var(--ink-soft);
+    font-size:16px; line-height:1.7;
+  }
+  .window-body ul{padding-left:20px;}
+  .window-body li{margin-bottom:6px;}
+  .window-body .lead{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:20px; line-height:1.5;
+    color:var(--ink);
+  }
+  .window-body h3{font-size:20px; margin:32px 0 10px;}
+
+  .more-gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap:16px;
+    margin:24px 0 8px;
+  }
+  .more-figure{
+    margin:0;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+    background:var(--card-bg);
+  }
+  .more-figure.wide{grid-column:1 / -1;}
+  .more-figure img,
+  .more-figure video{display:block; width:100%; height:auto; background:var(--card-bg);}
+  .more-figure figcaption{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--ink-soft);
+    padding:8px 10px;
+    border-top:1px solid var(--line);
+    background:var(--card-bg);
+  }
+
+  /* ---------- CLICK A PICTURE TO ENLARGE ---------- */
+  .slide img,
+  .more-figure img,
+  .hero-figure img{cursor:zoom-in;}
+
+  .lightbox{
+    width:100vw; height:100vh; height:100dvh;
+    max-width:none; max-height:none;
+    margin:0; padding:0; border:0;
+    overflow:hidden;
+    background:rgba(7,7,8,.94); color:#fff;
+    touch-action:pan-y pinch-zoom;      /* horizontal swipes are ours; vertical scroll and pinch stay native */
+  }
+  .lightbox[open]{
+    display:flex; align-items:center; justify-content:center;
+    animation:backdrop-in .15s ease-out;
+  }
+  .lightbox::backdrop{background:transparent;}
+  #lb-img{
+    display:block;
+    width:auto; height:auto;
+    max-width:calc(100% - 136px);
+    max-height:calc(100vh - 128px);
+    max-height:calc(100dvh - 128px);
+    object-fit:contain;
+  }
+
+  .lb-close,
+  .lb-nav{
+    position:absolute;
+    width:40px; height:40px; padding:0;
+    background:var(--card-bg); color:var(--ink);
+    border:1px solid var(--line); border-radius:var(--radius);
+    cursor:pointer;
+  }
+  .lb-close{top:16px; right:16px; display:grid; place-items:center;}
+  .lb-nav{display:none; top:50%; transform:translateY(-50%);}
+  .lb-nav.prev{left:16px;}
+  .lb-nav.next{right:16px;}
+  .lb-close:hover,
+  .lb-nav:hover:not(:disabled){background:var(--accent-teal); color:var(--paper); border-color:var(--accent-teal);}
+  .lb-nav:disabled{opacity:.35; cursor:default;}
+  .lightbox button:focus-visible{outline-color:#fff;}
+
+  /* arrows for mouse users; touch users swipe instead */
+  @media (hover:hover) and (pointer:fine){
+    .lb-nav{display:grid; place-items:center;}
+  }
+  .lightbox.single .lb-nav{display:none;}
+  @media not all and (hover:hover) and (pointer:fine){
+    #lb-img{max-width:calc(100% - 24px);}
+  }
+
+  .lb-bar{
+    position:absolute; left:0; right:0; bottom:0;
+    display:flex; justify-content:center; align-items:baseline; gap:16px;
+    padding:16px 20px 20px;
+    font-family:'IBM Plex Mono', monospace; font-size:12px;
+    color:#e6e6e6; text-align:center;
+  }
+  .lb-bar span:empty{display:none;}
+  #lb-count{color:#9b9b9b;}
+
+  @media (max-width:600px){
+    .project-modal{
+      width:100%; height:100vh; height:100dvh;
+      max-height:none;
+      border:0; border-radius:0;
+    }
+    .window-bar{padding-left:10px;}
+    .window-body{padding:20px 18px 32px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .project-modal[open],
+    .project-modal[open]::backdrop,
+    .lightbox[open]{animation:none;}
+    .car-btn{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<div id="pressure-bar" aria-hidden="true"></div>
+
+<!-- ============================ NAV ============================ -->
+<header class="site-nav">
+  <div class="nav-inner">
+    <div class="nav-name">Eileen Phan</div> <!-- EDIT ME -->
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="document.querySelector('nav.links').classList.toggle('open')">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav class="links">
+      <a href="#projects">Projects</a>
+      <a href="#internships">Internships</a>
+      <a href="#skills">Skills</a>
+      <a href="#extra-experience">Extra Experience</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============================ HERO ============================ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Eileen<span class="last">Phan</span></h1> <!-- EDIT ME -->
+      <p class="blurb">
+        Thanks for visiting my portfolio! I am proud to share the work I have done in my academic and
+        professional career. Please feel free to explore my projects, internships, and skills below.
+      </p> <!-- EDIT ME -->
+      <ul class="hero-stats"> <!-- EDIT ME -->
+        <li><span class="num">3+ yrs</span> Technical tutoring, mentorship, and STEM outreach</li>
+        <li><span class="num">1.5 yrs</span> Hydraulics engineering</li>
+        <li><span class="num">1 yr</span> HVAC engineering</li>
+      </ul>
+    </div>
+    <div class="hero-side">
+      <figure class="hero-figure">
+        <img src="images/Viasat.png" alt="Photo of Eileen Phan"> <!-- EDIT ME: swap image -->
+      </figure>
+      <dl class="info-box"> <!-- EDIT ME -->
+        <div><dt>Degree</dt><dd>B.S. Mechanical Engineering</dd></div>
+        <div><dt>School</dt><dd>University of Rochester</dd></div>
+        <div><dt>Grad</dt><dd>May 2027</dd></div>
+        <div><dt>Based in</dt><dd>Rochester, NY &middot; Cranston, RI</dd></div>
+        <div><dt>Email</dt><dd><a href="mailto:ephan@u.rochester.edu">ephan@u.rochester.edu</a></dd></div>
+        <div><dt>LinkedIn</dt><dd><a href="https://linkedin.com/in/eileenphan" target="_blank" rel="noopener">linkedin.com/in/eileenphan</a></dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PROJECTS ============================ -->
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Projects</h2>
+    </div>
+
+    <!-- PROJECT 6 -->
+    <div class="project">
+      <figure class="project-figure">
+        <div class="carousel">
+          <div class="carousel-track"> <!-- EDIT ME: swap in your own pictures -->
+            <div class="slide" data-caption="Fig. 8 — Flywheel assembly.">
+              <img src="images/Flywheel1.png" alt="Flywheel manufacturing">
+            </div>
+            <div class="slide" data-caption="Fig. 2 — XX">
+              <img src="images/XX.png" alt="Flywheel manufacturing, second view">
+
+            </div>
+          </div>
+        </div>
+        <figcaption>Fig. 8 — Flywheel assembly.</figcaption>
+      </figure>
+      <div class="project-body">
+        <span class="eyebrow">Project 01 · ME 204 Mechanical Design, Individual Project</span>
+        <h3>Flywheel Manufacturing</h3>
+        <p>
+          A flywheel uses the conservation of angular momentum to store rotational energy by converting incoming power into rotational kinetic energy and keeping it stored as momentum.
+           I am building this to test a flywheel's energy storage capacity and to explore the effects of
+            different materials and manufacturing techniques on its performance. This project is unique in the sense 
+            that I am designing and manufacturing the flywheel from scratch, including the selection of materials, 
+            the design of the geometry, and the fabrication process. The goal is to create a flywheel that can store 
+            a significant amount of energy while maintaining structural integrity and safety.
+        </p>
+        <div class="tags">
+          <span class="tag">Siemens Simulations</span>
+          <span class="tag">Rotational Imbalance</span>
+        </div>
+        <div class="project-links">
+          <button type="button" class="read-more" aria-haspopup="dialog">Read More</button>
+        </div>
+      </div>
+
+      <template class="more">
+        <!-- EDIT ME: the text and pictures shown in this project's pop-up -->
+        <p class="lead">Part of ME 204 Mechanical Design, I am designing, machining, and casting a flywheel air engine to practice the fundamentals on how manufacturing choices impact its operational parameters. (Ongoing Project)</p>
+
+        <div class="more-gallery">
+          <figure class="more-figure">
+            <img src="images/FlyWheel1A.png" alt="Flywheel manufacturing" loading="lazy">
+            <figcaption>Fig. 2 — Flywheel exploded assembly view.</figcaption>
+          </figure>
+          <figure class="more-figure">
+            <img src="images/FlyWheel2A.png" alt="Flywheel manufacturing, second view" loading="lazy">
+            <figcaption>Fig. 3 — Flywheel assembly showing the file and corresponding part name.</figcaption>
+          </figure>
+        </div>
+
+        <h3>Overview</h3>
+        <p>Every part of the flywheel -- the wheel, stand, feet, dog, propeller, crank, cylinder, and backbone -- was manufactured by me using several different processes, which let me compare how each one affected mass distribution, balance, and strength. The wheel was pewter cast to concentrate mass at the rim and maximize rotational inertia, the stand was CNC machined for tight tolerances on the bearing bore, and the feet were injection molded for repeatable, low-cost production. The final stored energy will be tested at a specific RPM in order to quantify how the design performed.</p>
+
+                <div class="more-gallery">
+          <figure class="more-figure">
+            <img src="images/FlyWheel2.png" alt="Flywheel manufacturing" loading="lazy">
+            <figcaption>Fig. 4 — CNC machining the stand.</figcaption>
+          </figure>
+          <figure class="more-figure">
+            <img src="images/FlyWheel3.png" alt="Flywheel manufacturing, second view" loading="lazy">
+            <figcaption>Fig. 5 — Injection molding the feet.</figcaption>
+          </figure>
+                    <figure class="more-figure">
+            <img src="images/FlyWheel4.png" alt="Flywheel manufacturing, second view" loading="lazy">
+            <figcaption>Fig. 6 — Carbon fiber layup of the propeller.</figcaption>
+          </figure>
+                    <figure class="more-figure">
+            <img src="images/FlyWheel5.jpeg" alt="Flywheel manufacturing, second view" loading="lazy">
+            <figcaption>Fig. 7 — Metal casting prototype of a wheel using pewter.</figcaption>
+          </figure>
+        </div>
+
+        <h3>Approach</h3>
+        <p>I modeled the flywheel in SolidWorks and ran Siemens simulations to predict rotational imbalance before committing to manufacturing to ensure that there was no significant off-center mass distribution at speed that would translate into bearing wear and vibration. After machining and casting each component, I balanced the assembly and reduced measured imbalance by through iterative material removal at the rim. The biggest lesson from machining especially was how much manufacturing tolerance compounds across a multi-process build, and how important it is for an engineer to consider the cumulative effect of these tolerances by actually building the parts themselves. This is an ongoing project that is still being worked upon; final results will be available soon.</p>
+      </template>
+    </div>
+
+    <!-- PROJECT 1 — duplicate this whole <div class="project"> block for each project.
+         PICTURES: each <div class="slide"> is one swipeable picture. Add or remove slides freely,
+                   and give each one its own data-caption.
+         POP-UP:   everything inside <template class="more"> is what appears when someone clicks Read More. -->
+    <div class="project">
+      <figure class="project-figure">
+        <div class="carousel">
+          <div class="carousel-track"> <!-- EDIT ME: swap in your own pictures -->
+            <div class="slide" data-caption="Fig. 8 — Full setup.">
+              <img src="images/WaterHammer1.jpg" alt="Water hammer test rig, full setup">
+            </div>
+            <div class="slide" data-caption="Fig. 8b — Pressure sensor and valve assembly.">
+              <img src="images/WaterHammer2.jpg" alt="Water hammer test rig, second view">
+            </div>
+            <div class="slide" data-caption="Fig. 3 — Data acquisition and control setup.">
+              <img src="images/XXX.png" alt="Water hammer test rig, third view">
+            </div>
+          </div>
+        </div>
+        <figcaption>Fig. 8 — Full setup.</figcaption>
+      </figure>
+      <div class="project-body">
+        <span class="eyebrow">Project 02 · Taco Inc. Internship, Individual Project</span>
+        <h3>Water Hammer Test Rig</h3>
+        <p>
+           A test rig that simulates water hammer events in a controlled lab space. The rig is able to generate water hammer events by rapidly closing 
+           a valve, and is equipped with pressure sensors to measure the resulting pressure spikes. 
+           The data collected from these tests verifies the mechanical resistance of components and/or assemblies
+           to water hammer generated by a hydraulic circuit under pressure. Mainly used on components intended for use in the DHW
+applications (Domestic Hot Water).
+        </p>
+        <div class="tags">
+          <span class="tag">Hydrostatic Testing</span>
+          <span class="tag">System Modeling</span>
+        </div>
+        <div class="project-links">
+          <button type="button" class="read-more" aria-haspopup="dialog">Read More</button>
+        </div>
+      </div>
+
+      <template class="more">
+        <!-- EDIT ME: the text and pictures shown in this project's pop-up -->
+        <p class="lead">Testing and characterization of pumps is essential for ensuring their reliability and performance in real-world applications.</p>
+
+        <div class="more-gallery">
+          <figure class="more-figure">
+            <img src="images/WaterHammer1.jpg" alt="Water hammer test rig, full setup" loading="lazy">
+            <figcaption>Fig. 8 — Full setup.</figcaption>
+          </figure>
+          <figure class="more-figure">
+            <img src="images/WaterHammer2.jpg" alt="Water hammer test rig, second view" loading="lazy">
+            <figcaption>Fig. 8b — Pressure sensor and valve assembly.</figcaption>
+          </figure>
+        </div>
+
+        <h3>How it works</h3>
+        <p>A Calpeda multistage pump pressurizes the loop, and the test sample sits about 8 m downstream through 16 mm tubing so that it's far enough that the pressure wave has room to develop before it reaches the gauges. Closing the ball valve rapidly stops flow and sends a pressure spike back, which a Keller sensor (rated to 50 bar, sampling at 5 kHz) and a PT100 probe capture it. A Caleffi water hammer arrestor and an air valve in the loop keep the surge contained to the test sample instead of the rest of the lab's plumbing, and a 100 L tank with a 1.5 kW heater lets the rig run hot-water trials representative of domestic hot water (DHW) use. The resulting pressure-time data is what's used to verify how much water hammer a given pump or assembly can withstand before it fails.</p>
+
+        <h3>My role</h3>
+        <p>I designed this rig and worked with technicians to size the pump, valve, and sensor package, as well as laying out the piping and instrumentation schematic the lab uses to build and run it. By the time my internship ended, the rig was fully built and the schematic was validated, but I wasn't able to run the actual pump qualification tests myself before I left; that testing picked up after my internship ended. The part of this I'm proudest of is documenting the test rig carefully, with enough detail, for someone else to run without me there.</p>
+      </template>
+    </div>
+
+    <!-- PROJECT 4 -->
+    <div class="project" data-report="files/Aeroacoustic_Turbine_Report.pdf" data-report-name="Phan_Aeroacoustic_Turbine_Report.pdf">
+      <figure class="project-figure">
+        <div class="carousel">
+          <div class="carousel-track"> <!-- EDIT ME: swap in your own pictures -->
+            <div class="slide" data-caption="Fig. 9 — Toroidal turbine prototype mounted for testing.">
+              <img src="images/Turbine.jpg" alt="Toroidal wind turbine">
+            </div>
+            <div class="slide" data-caption="Fig. 10 — Project poster, Aeroacoustic Performance of Toroidal Turbine Blades in Residential Areas.">
+              <img src="images/Aeroacoustic_Turbine_Poster.jpg" alt="Toroidal wind turbine, second view">
+            </div>
+          </div>
+        </div>
+        <figcaption>Fig. 10 — Toroidal blade prototype.</figcaption>
+      </figure>
+      <div class="project-body">
+        <span class="eyebrow">Project 03 · ME 241 Mechanics Lab, Team Project</span>
+        <h3>Toroidal Wind Turbine</h3>
+        <p>
+          A team research project comparing toroidal and conventional curved wind turbine blades for residential
+          use, testing whether a closed-loop geometry borrowed from quiet marine propellers can match a
+          conventional blade's power output. Both blades shared the same NACA 0018 airfoil and were 3D-printed
+          and tested indoors across four wind speeds. Against our own hypothesis, the toroidal blades came out
+          significantly more power-efficient at every speed tested, with competitive acoustic performance once
+          noise was normalized against power output.
+        </p>
+        <div class="tags">
+          <span class="tag">Siemens NX</span>
+          <span class="tag">3D Printing</span>
+          <span class="tag">Aeroacoustic Testing</span>
+        </div>
+        <div class="project-links">
+          <button type="button" class="read-more" aria-haspopup="dialog">Read More</button>
+          <a class="report-link" href="files/Aeroacoustic_Turbine_Report.pdf" target="_blank" rel="noopener" download="Phan_Aeroacoustic_Turbine_Report.pdf">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 19h14"/></svg>
+            Download Final Report
+          </a>
+        </div>
+      </div>
+
+      <template class="more">
+        <!-- EDIT ME: the text and pictures shown in this project's pop-up -->
+        <p class="lead">"Ever Better Blades" is a five-person team project (ME 241: Mechanics Lab) testing whether toroidal, closed-loop turbine blades, already used to quiet marine propellers, can hold their own against a conventional curved blade for residential wind power, on both efficiency and noise.</p>
+
+        <div class="more-gallery">
+          <figure class="more-figure">
+            <img src="images/Toroidal.jpeg" alt="Toroidal wind turbine" loading="lazy">
+            <figcaption>Fig. 11 — Toroidal blade, inspired by propeller design for low-noise operation in water applications.</figcaption>
+          </figure>
+          <figure class="more-figure">
+            <img src="images/Curved.jpeg" alt="Toroidal wind turbine, second view" loading="lazy">
+            <figcaption>Fig. 12 — Curved blade, the conventional residential design used as our baseline.</figcaption>
+          </figure>
+                   <figure class="more-figure">
+            <img src="images/Broken.jpeg" alt="Toroidal wind turbine" loading="lazy">
+            <figcaption>Fig. 13 — 3D print with its support structures still attached.</figcaption>
+          </figure>
+          <figure class="more-figure">
+            <img src="images/Broken1.jpeg" alt="Toroidal wind turbine, second view" loading="lazy">
+            <figcaption>Fig. 14 — A failed print prototype — severe fracture due to thin geometry at the leading edge.</figcaption>
+          </figure>
+        </div>
+
+        <h3>Overview</h3>
+        <p>Residential wind turbines almost always use a curved blade, but toroidal, closed-loop blades are already gaining ground in marine propeller design for their quieter, more stable performance. Our team set out to see whether that geometry translates to a land-based turbine. We designed both blades around the same NACA 0018 airfoil and matched rotor diameter (356.5 mm) so the comparison isolated geometry rather than scale: I worked on the toroidal blade's CAD in Siemens NX and Onshape, while the curved baseline was generated in QBlade using Schmitz optimization. Both were 3D-printed in PLA on a Bambu Lab H2D printer -- the toroidal blade's more complex geometry took nearly 12 hours to print and came out noticeably heavier (3.75 oz vs. 2.25 oz) with roughly 12x the moment of inertia of the curved blade, a byproduct of the shapes rather than a design choice.</p>
+        <p>We tested both blades indoors with a leaf blower and cardboard nozzle for uniform airflow across four wind speeds (4.25–9.68 m/s), using a Hall-effect sensor and Arduino to track rotor RPM and a microphone with time-domain background subtraction to isolate blade noise from motor noise.</p>
+
+        <h3>Results</h3>
+        <p>The results went against our own hypothesis. Based on the marine literature, we'd predicted the toroidal blades would be about 15% less power-efficient than the curved blades, trading some output for quieter operation. Instead, the toroidal blades were significantly more efficient at every wind speed we tested, and consistently reached a higher tip-speed ratio, meaning they spun faster relative to the incoming wind. On acoustics, the toroidal blades were louder at the same wind speed (5.5–8.7 dB), but that gap tracked almost entirely with RPM: the toroidal blades simply spun about 50% faster at a given wind speed. Once we normalized sound by power output per unit airflow, the toroidal blade was competitive across the board and measured roughly 10% quieter than the curved blade at our highest tested speed, though with overlapping uncertainty bands we're careful to call that a trend.</p>
+
+        <h3>Limitations &amp; what's next</h3>
+        <p>The comparison wasn't perfectly matched: the two blade designs ended up with different surface areas, our wooden test tower wasn't fully damped against vibration, and our microphone wasn't calibrated to an absolute pressure reference, so our sound levels are relative rather than directly comparable to published data. The full methodology, uncertainty analysis, and our recommendations for a fairer follow-up test (a calibrated microphone, a matched-surface-area curved blade, and a cost comparison) are in the final report, linked above.</p>
+      </template>
+    </div>
+
+    <!-- PROJECT 3 -->
+    <div class="project">
+      <figure class="project-figure">
+        <div class="carousel">
+          <div class="carousel-track"> <!-- EDIT ME: swap in your own pictures or videos -->
+            <div class="slide" data-caption="Fig. 15 — CFD analysis of TES tank using Luminary AI. Parts are redacted per request.">
+              <img src="images/CFD.gif" alt="Thermal energy storage model animation">
+            </div>
+            <div class="slide" data-caption="Fig. 2 — Temperature contour at steady state.">
+              <img src="images/TES_2.png" alt="Thermal energy storage tank CFD result, second view">
+            </div>
+            <div class="slide" data-caption="Fig. 3 — Thermal stratification across the tank.">
+              <img src="images/TES_3.png" alt="Thermal energy storage tank CFD result, third view">
+            </div>
+          </div>
+        </div>
+        <figcaption>Fig. 15 — CFD analysis of TES tank using Luminary AI. Parts are redacted. </figcaption>
+      </figure>
+      <div class="project-body">
+        <span class="eyebrow">Project 04 · Taco Inc. Internship, Individual Project</span>
+        <h3>Thermal Energy Storage (TES) Model and CFDs</h3>
+        <p>
+          CFD models of various thermal energy storage tanks simulated to predict how they will perform for data center
+          cooling loads before they're sold to customers. The technically interesting part is relating the transient thermal model to
+          customer performance numbers; the simulation has to be accurate, and it has to be fast enough to run a sweep across multiple flow rates and ambient conditions so the customer can see how the tank will perform in their specific application.
+        </p>
+        <div class="tags">
+          <span class="tag">STAR-CCM+</span>
+          <span class="tag">Luminary AI</span>
+        </div>
+        <div class="project-links">
+          <button type="button" class="read-more" aria-haspopup="dialog">Read More</button>
+        </div>
+      </div>
+
+      <template class="more">
+        <!-- EDIT ME: the text and pictures shown in this project's pop-up -->
+        <p class="lead">CFD analysis of the thermal performance of thermal energy storage (TES) tanks for data center cooling.</p>
+
+        <div class="more-gallery">
+          <figure class="more-figure wide">
+            <img src="images/CFD.gif" alt="Thermal energy storage model animation" loading="lazy">
+            <figcaption>Fig. 15 — CFD analysis of TES tank using Luminary AI.</figcaption>
+          </figure>
+          <figure class="more-figure">
+            <img src="images/TES_2.png" alt="Thermal energy storage tank CFD result, second view" loading="lazy">
+            <figcaption>Fig. 17 — Temperature contour at steady state.</figcaption>
+          </figure>
+          <figure class="more-figure">
+            <img src="images/TES_3.png" alt="Thermal energy storage tank CFD result, third view" loading="lazy">
+            <figcaption>Fig. 18 — Thermal stratification across the tank.</figcaption>
+          </figure>
+        </div>
+
+        <h3>What I did</h3>
+        <p>I ran transient CFD models of TES tanks in STAR-CCM+ and Luminary AI and set up a cloud-based parameter sweep to evaluate performance across a range of flow rates and ambient conditions. The model tracked thermal stratification inside the tank over a full charge/discharge cycle so the results could be compared directly against the system's cooling requirements. Additionally, I owned a parameterized model that allowed for rapid evaluation of different design configurations in SolidWorks.</p>
+
+         <h3>Learning how to use AI as an engineer</h3>
+        <p>Running this parameter sweep the traditional way, one STAR-CCM+ case at a time, each one meshed and solved individually, would have made it impractical to cover more than a couple of flow rate and ambient temperature combinations before a deadline (and especially in only a couple months within my internship span). Using Luminary AI's cloud-based solver let me run dozens of configurations in parallel instead of sequentially, which is what actually made a sweep possible rather than a single estimate. I think that's where AI is becoming necessary for engineers generally; it doesn't replace the engineering judgment of setting up the physics, boundary conditions, and mesh in the first place, but it removes the computational bottleneck that would otherwise force us to test less than we can.</p>
+        <p>That speed only matters if the results can be trusted, though. I treated every AI accelerated run the way I'd treat any simulation result that didn't converge. My manager and I spot-checked a subset of the Luminary AI cases against matching STAR-CCM+ runs solved the conventional way, confirmed the thermal trends, and only released numbers to customers once they'd cleared that check. Faster tools raise the bar on verification only if the engineer is still the one who has to catch a model that converged to the wrong answer "confidently." This is a developing, one of a kind skill to learn as we inch towards a smarter, quicker world.</p>
+      </template>
+    </div>
+
+    <!-- PROJECT 2 -->
+    <div class="project">
+      <figure class="project-figure">
+        <div class="carousel">
+          <div class="carousel-track"> <!-- EDIT ME: swap in your own pictures -->
+            <div class="slide" data-caption="Fig. 16 — Self-sensing test loop with parallel flow configuration.">
+              <img src="images/Self_Sensing_Test_Loop_Parallel_Flow.png" alt="Self-sensing test loop in a parallel flow configuration">
+            </div>
+            <div class="slide" data-caption="Fig. 17 — Self-sensing test loop in a single flow configuration.">
+              <img src="images/SingleFlow.jpg" alt="Self-sensing test loop, second view">
+            </div>
+            <div class="slide" data-caption="Fig. 3 — Close-up of the sensor and flange instrumentation.">
+              <img src="images/Self_Sensing_Test_Loop_3.png" alt="Self-sensing test loop, third view">
+            </div>
+          </div>
+        </div>
+        <figcaption>Fig. 16 — Self-sensing test loop with parallel flow configuration.</figcaption>
+      </figure>
+      <div class="project-body">
+        <span class="eyebrow">Project 05 · Taco Inc. Internship, Individual Project</span>
+        <h3>Self-Sensing Test Loop</h3>
+        <p>
+          This loop is designed to test the self-sensing capabilities of a new type of sensor utilized at my internship. 
+          The loop allows for controlled flow conditions and can be configured in various ways 
+          to simulate different scenarios. Data collected includes flow rate and pressure measurements, which are used to evaluate
+           the accuracy and reliability of the self-sensing technology.
+        </p>
+        <div class="tags">
+          <span class="tag">SolidWorks</span>
+          <span class="tag">Pump Performance Curves</span>
+    
+        </div>
+        <div class="project-links">
+          <button type="button" class="read-more" aria-haspopup="dialog">Read More</button>
+        </div>
+      </div>
+
+      <template class="more">
+        <!-- EDIT ME: the text and pictures shown in this project's pop-up -->
+        <p class="lead">A closed-loop test rig for evaluating the self-sensing capabilities of a new type of sensor used at my internship.</p>
+
+        <div class="more-gallery">
+          <figure class="more-figure">
+            <img src="images/Self_Sensing_Test_Loop_Parallel_Flow.png" alt="Self-sensing test loop in a parallel flow configuration" loading="lazy">
+            <figcaption>Fig. 16 — Self-sensing test loop with parallel flow configuration.</figcaption>
+          </figure>
+          <figure class="more-figure">
+            <img src="images/SingleFlow.jpg" alt="Self-sensing test loop, second view" loading="lazy">
+            <figcaption>Fig. 17 — Self-sensing test loop in a single flow configuration.</figcaption>
+          </figure>
+        </div>
+
+        <h3>Design</h3>
+        <p>The loop began as a SolidWorks CAD model. It provides controlled flow conditions and can be configured in different ways, such as the parallel flow arrangement above, to simulate different scenarios. Hardware includes a flow meter and custom flanges, which I verified with FEA for ASME compliance. The construction was relatively simple: PVC schedule 80 pipes, nipples, valves, vents, and custom freedom flanges to remove and add different in-line pumps. I constructed the single flow configuration, and designed the next test rig for parallel flow, but due to the end of my internship I was not able to construct the final test loop. I had to consider how technicians would interact with the system, and worked closely with the industrial engineering team to ensure usability and safety.</p>
+
+        <h3>What it measures</h3>
+        <p>Flow rate and pressure measurements are collected from the loop and used to evaluate the accuracy and reliability of the self-sensing technology. At Taco Inc., new programmable logic controllers (PLC's) were being integrated with the test rig to automate data collection and analysis. I was responsible for working with the technicians to ensure proper operation and maintenance of the system after construction, including taking training lessons on WEG variable frequency drives (VFDs).</p>
+      </template>
+    </div>
+
+  </div>
+</section>
+<!-- ============================ INTERNSHIPS ============================ -->
+<section id="internships">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Internships & Experience</h2>
+    </div>
+
+    <div class="role-item">
+      <div class="role-meta">
+        <span class="company">Taco Comfort Solutions</span>
+        Cranston, Rhode Island<br>
+        May 2026 - August 2026
+      </div>
+      <div class="role-body">
+        <h3>Mechanical Engineering Intern - Hydraulics</h3>
+        <ul>
+          <li>Built water hammer test rig to characterize pressure surges and perform shock testing, qualifying
+pump structural integrity and determining pump failure thresholds</li>
+          <li>Constructed a closed-loop test rig for self-sensing pumps beginning in SolidWorks CAD with hardware including
+flow meter and custom flanges verified using FEA for ASME compliance</li>
+          <li>Owned a parameterized SolidWorks model of pressurized tank, enabling rapid geometric scaling across product
+variants, accelerating manufacturing turnaround</li>
+          <li>Delivered customer-facing CFD thermal performance of thermal energy storage tanks using STAR-CCM+ and
+Luminary AI for data center cooling applications</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ROLE 2 -->
+    <div class="role-item">
+      <div class="role-meta">
+        <span class="company">University of Rochester School of Medicine</span>
+        Rochester, NY<br>
+        June 2025 - August 2025
+      </div>
+      <div class="role-body">
+        <h3>Research Assistant</h3>
+        <ul>
+          <li>Adapted MATLAB image analysis using microscopy imaging to automate detection and classification of
+anthropogenic materials in samples, reducing manual identification time by 80%</li>
+          <li>Quantified anthropogenic contamination across biological samples to generate data for nanomembrane filtration</li>
+        </ul>
+        <div class="role-links"> 
+          <a class="report-link" href="files/Assessing_Anthropogenic_Materials.pdf" target="_blank" rel="noopener" download="Phan_Assessing_Anthropogenic_Pollution_Poster.pdf">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 19h14"/></svg>
+            Download Poster — Assessing Anthropogenic Pollution
+          </a>
+          <a class="report-link" href="files/Instructional_Deviation_to_Drive_Purposeful_Learning.pdf" target="_blank" rel="noopener" download="Phan_Instructional_Deviation_Poster.pdf">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 19h14"/></svg>
+            Download Poster — Instructional Deviation As a Way to Drive Purposeful Learning
+          </a>
+        </div>
+      </div>
+    </div>
+           <!-- ROLE 3 -->
+    <div class="role-item">
+      <div class="role-meta">
+        <span class="company">The Steelyard</span>
+        Providence, RI<br>
+        July 2022 - September 2022
+      </div>
+      <div class="role-body">
+        <h3>Apprentice Welder</h3>
+        <ul>
+          <li>Learned, applied, and developed MIG, TIG, and stick welding skills </li>
+          <li>Built welded structures and components to specification</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ROLE 4 -->
+    <div class="role-item">
+      <div class="role-meta">
+        <span class="company">Johnson Controls</span>
+        Warwick, Rhode Island<br>
+        September 2021 - March 2022
+      </div>
+      <div class="role-body">
+        <h3>Mechanical Engineering Intern - Hydraulics</h3>
+        <ul>
+          <li>Designed hydraulic lift table for fire sprinkler wall-wetting tests in SolidWorks using site inspection data,
+improving testing accuracy; presented findings to stakeholders resulting in post-internship product adoption</li>
+          <li> Prepared First Article Inspection (FAI) by tracing order numbers and batch codes and compiling assembly
+drawings, presenting manufacturing findings to the team</li>
+          <li>Maintained lab development workflow in Jira using Kanban boards, updating mechanical and electrical parameter
+documentation for outdated VAV and CAV Revit part families</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ SKILLS ============================ -->
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Skills</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h4>Languages</h4>
+        <ul>
+          <li>MATLAB</li>
+         
+          <li>Python</li>
+          <li>Powershell</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Software</h4>
+        <ul>
+          <li>SolidWorks</li>
+          <li>Siemens Simulation</li>
+          <li>Jupyter</li>
+          <li>Jira + Kanban + Epicor</li>
+          <li>STAR-CCM+</li>
+          <li>ANSYS Fluent</li>
+          <li>Luminary AI Cloud</li>
+          <li>Revit</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Testing & Analysis</h4> <!-- EDIT ME: added from your project tags and internship bullets -->
+        <ul>
+          <li>FEA (Finite Element Analysis)</li>
+          <li>CFD (Computational Fluid Dynamics)</li>
+          <li>Hydrostatic Testing</li>
+          <li>Pump Performance Curves</li>
+          <li>System Modeling</li>
+          <li>Rotational Balancing</li>
+          <li>ASME Compliance</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Manufacturing</h4>
+        <ul>
+          <li>Mill</li>
+          <li>Lathe</li>
+          <li>3D Printing</li>
+          <li>Injection Molding</li>
+          <li>Metal & Mold Casting</li>
+          <li>First Article Inspection (FAI)</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Coursework</h4>
+        <ul>
+          <li>Advanced Mechanical Design</li>
+          <li>Semiconductor Devices and Circuits</li>
+          <li>Mechanical Systems (Dynamic, Electromechanical, Control, Thermal, Fluid Systems)</li>
+          <li>Heat Power Applications</li>
+          <li>Hardware Security</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ EXTRA EXPERIENCE ============================ -->
+<section id="extra-experience">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>My experience as a...</h2>
+    </div>
+    <div class="exp-row">
+      <div class="exp-track"> <!-- EDIT ME: swap in your own pictures/text -->
+
+        <div class="exp-card">
+          <button type="button" class="exp-cover" aria-haspopup="dialog">
+            <img src="images/Viasat2.WEBP" alt="Viasat Finalist cover photo"> <!-- EDIT ME: swap image -->
+          </button>
+          <div class="exp-caption">
+            <span class="eyebrow">Competition</span>
+            <h3>Viasat Space for Good Finalist</h3>
+          </div>
+          <template class="more">
+            <p class="lead">How do you turn a product idea into something real?</p>
+            <div class="more-gallery">
+              <figure class="more-figure">
+                <img src="images/Viasat2.WEBP" alt="Viasat finalist experience, photo 1" loading="lazy">
+                <figcaption>Fig. 18 — Presented to a panel of judges spanning U.S Space Force officers and Viasat executives.</figcaption>
+              </figure>
+              <figure class="more-figure">
+                <img src="images/Viasat3.WEBP" alt="Viasat finalist experience, photo 2" loading="lazy">
+                <figcaption>Fig. 19 — Finalist award ceremony.</figcaption>
+              </figure>
+            </div>
+            <p>As you might expect, I learned a lot! In just five months, I developed and mapped out an innovation pitch centered on sustainable satellite technology. Beyond establishing a proof of concept, I had to consider the business strategies necessary to bring an idea to market, navigate export control regulations such as ITAR and EAR, and learn what makes a pitch compelling to stakeholders. Along the way, I had the opportunity to work with a Viasat mentor, complete Viasat-sponsored coursework in satellite operations, and connect with the team outside of the technical environment over many rounds of mini golf. The experience challenged me to think beyond engineering design and consider the business, regulatory, and collaborative dimensions of turning an innovative idea into a viable solution. This was a pivotal point in my academic career where I realized how being a "unicorn" -- one that could understand the technical details and also communicate effectively with non-technical stakeholders -- helps shape how I approach complex problems as an engineer. In order to make a product real, surround yourself, immerse yourself, in unicorns.</p>
+          </template>
+        </div>
+
+        <div class="exp-card">
+          <button type="button" class="exp-cover" aria-haspopup="dialog">
+            <img src="images/edge3.jpg" alt="EDGE Fellow cover photo"> <!-- EDIT ME: swap image -->
+          </button>
+          <div class="exp-caption">
+            <span class="eyebrow">Fellowship</span>
+            <h3>Semiconductor EDGE Fellow</h3>
+          </div>
+          <template class="more">
+            <p class="lead">Being a fellow has taught me where I can add value to the semiconductor industry as a mechanical engineer.</p>
+            <div class="more-gallery">
+              <figure class="more-figure">
+                <img src="images/edge3.jpg" alt="EDGE fellowship, semiconductor industry tour, photo 1" loading="lazy">
+                <figcaption>Fig. 20 — Performed CMP on wafers at the University of Washington Nanofabrication Facility.</figcaption>
+              </figure>
+              <figure class="more-figure">
+                <img src="images/edge.jpeg" alt="EDGE fellowship, hands-on activity, photo 2" loading="lazy">
+                <figcaption>Fig. 21 — Built a rough vaccuum system at NY Creates.</figcaption>
+              </figure>
+            </div>
+<p>For many early-career mechanical engineers, the semiconductor industry can feel like an unfamiliar field, often overshadowed by more prominent engineering sectors. The Semiconductor EDGE Fellowship helped bridge that gap for me by providing hands-on industry experience and exposure to cutting-edge research, development, and manufacturing processes. Over the past three years, I have visited Analog Devices, MIT Lincoln Laboratory, the University of Washington NanoFab, NY Creates, and Applied Materials Technician Learning Center, each offering a different perspective on the breadth of opportunities within the semiconductor industry. At NY Creates, I worked with control systems and pneumatics and built a preliminary vacuum system. At the University of Washington NanoFab, I gained exposure to chemical mechanical planarization (CMP) and shadowed mechanical engineers involved in semiconductor packaging. At Applied Materials Technician Learning Center, I learned how field engineers support semiconductor manufacturing operations across the country and around the world and just how expanse this industry is. It's quite the unsung sector despite its part in modern tech, and I'm grateful to experience the opportunities this field offers to bridge the gap between my education and the workforce.</p>
+          </template>
+        </div>
+
+        <div class="exp-card">
+          <button type="button" class="exp-cover" aria-haspopup="dialog">
+            <img src="images/lspace2.jpg" alt="NASA L'Space Lead Engineer cover photo"> <!-- EDIT ME: swap image -->
+          </button>
+          <div class="exp-caption">
+            <span class="eyebrow">NASA Program</span>
+            <h3>NASA L'Space Lead Engineer</h3>
+          </div>
+          <template class="more">
+            <p class="lead">A successful mission is more than the sum of its parts; it requires every requirement and objective to work together.</p>
+            <div class="more-gallery">
+              <figure class="more-figure">
+                <img src="images/lspace2.jpg" alt="NASA L'Space program, photo 1" loading="lazy">
+                <figcaption>Fig. 22 — Certificate of Achievement.</figcaption>
+              </figure>
+            </div>
+            <p>In this role, I led my team in developing the mission’s engineering architecture from the ground up, defining mission goals, requirements, and specifications; building the Engineering Traceability Matrix; and selecting the instrument payload. I collaborated closely with the science and programmatic subteams to translate NASA Science Mission Directorate (SMD) and Exploration Systems Development Mission Directorate (ESDMD) directives into measurable engineering requirements for a neutrino-based positioning, navigation, and timing (PNT) mission. Through quad charts, subject matter expert consultations, and mission planning, I helped develop a seed proposal aimed at addressing a critical gap in NASA’s existing technological capabilities.
+This experience has shaped how I approach engineering by teaching me to look beyond individual components and consider how technical decisions support an entire mission. I learned to navigate the ambiguity of early-stage design, balance scientific objectives with engineering constraints, and communicate complex technical concepts across multidisciplinary teams. Most importantly, I gained an appreciation for the systems-level thinking required to transform an abstract idea into a feasible, requirements-driven solution. As an engineer, I want to bring this same mindset to future challenges: understanding the broader problem, collaborating across disciplines, and developing solutions that are not only technically sound but also purposeful and responsive to real-world needs.</p>
+          </template>
+        </div>
+
+        <div class="exp-card">
+          <button type="button" class="exp-cover" aria-haspopup="dialog">
+            <img src="images/sase1.jpeg" alt="SASE regional coordinator cover photo"> <!-- EDIT ME: swap image -->
+          </button>
+          <div class="exp-caption">
+            <span class="eyebrow">Leadership</span>
+            <h3>SASE Regional Coordinator</h3>
+          </div>
+          <template class="more">
+            <p class="lead">Nearly four years of leading SASE taught me to embrace uncertainty, trust my team, and make purposeful decisions.</p>
+            <div class="more-gallery">
+              <figure class="more-figure">
+                <img src="images/sase1.jpeg" alt="SASE regional coordinator session, photo 1" loading="lazy">
+                <figcaption>Fig. 23 — SASE Conference 2025</figcaption>
+              </figure>
+            </div>
+            <p>I was elected to and served in every position within SASE, an experience that shaped my belief that meaningful organizational impact comes from being willing to take on diverse roles and responsibilities. Leadership is developed through experiences that challenge us, teach us to navigate failure, and build resilience. Learning to lead has become a cornerstone of my personal and professional development, which I have further pursued through leadership-focused programs and courses, including the UR Medallion Program, CASC 358: Leadership Experiences, and Toastmasters.
+
+One principle that guides my approach to leadership is General Colin Powell’s 40/70 rule -- the importance of making informed decisions without waiting for perfect information. Leadership requires the confidence to make decisions and to ensure that the community we cultivate, and really the people we invite to the table, plays a critical role in shaping purposeful decisions. </p>
+          </template>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CONTACT / FOOTER ============================ -->
+<footer id="contact">
+  <div class="wrap">
+    <h2>Get in touch</h2>
+    <p>The fastest way to reach me is email and LinkedIn. </p>
+    <div class="footer-links">
+      <a href="mailto:ephan@u.rochester.edu">ephan@u.rochester.edu</a>
+
+      <a href="https://linkedin.com/in/eileenphan" target="_blank" rel="noopener">LinkedIn</a>
+    </div> <!-- EDIT ME -->
+    <div class="footer-bottom">© 2026 Eileen Phan. All rights reserved.</div>
+  </div>
+</footer>
+
+<!-- ============================ READ MORE POP-UP ============================ -->
+<dialog class="project-modal" id="project-modal" aria-labelledby="modal-title">
+  <div class="window-bar">
+    <div class="window-tabs">
+      <div class="window-tab"><span id="modal-title">Project</span></div>
+      <a id="modal-report-tab" class="window-tab report-tab" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 19h14"/></svg>
+        <span>Download Final Report</span>
+      </a>
+    </div>
+    <button type="button" class="window-close" aria-label="Close pop-up">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+  </div>
+  <div class="window-body" id="modal-body"></div>
+</dialog>
+
+<!-- ============================ ENLARGED PICTURE ============================ -->
+<dialog class="lightbox" id="lightbox" aria-label="Enlarged picture">
+  <button type="button" class="lb-close" aria-label="Close enlarged picture">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+  </button>
+  <button type="button" class="lb-nav prev" aria-label="Previous picture">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+  </button>
+  <img id="lb-img" alt="">
+  <button type="button" class="lb-nav next" aria-label="Next picture">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+  </button>
+  <div class="lb-bar"><span id="lb-caption"></span><span id="lb-count"></span></div>
+</dialog>
+
+<script>
+(function () {
+  'use strict';
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Scroll progress bar, filled by how far down the page you are ---------- */
+  (function () {
+    const bar = document.getElementById('pressure-bar');
+    if (!bar) return;
+    function update() {
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      const pct = max > 0 ? Math.min(1, Math.max(0, h.scrollTop / max)) : 0;
+      bar.style.setProperty('--scroll', pct);
+    }
+    document.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  })();
+
+  /* ---------- Close up the gap when a picture's file can't be found ----------
+     Rather than show a placeholder box, the slide/figure/card that picture
+     belonged to is removed outright, so no empty space is reserved for it. */
+  function imgReady(img) {
+    return new Promise(function (resolve) {
+      if (img.complete) { resolve(img.naturalWidth > 0); return; }
+      img.addEventListener('load', function () { resolve(true); }, { once: true });
+      img.addEventListener('error', function () { resolve(false); }, { once: true });
+    });
+  }
+  function dropEmptyGallery(gallery) {
+    if (gallery && !gallery.querySelector('.more-figure')) gallery.remove();
+  }
+  function dropEmptyFigure(fig) {
+    if (!fig) return;
+    const track = fig.querySelector('.carousel-track');
+    if (track && !track.querySelector('.slide')) {
+      const project = fig.closest('.project');
+      fig.remove();
+      if (project) project.classList.add('no-figure');
+    }
+  }
+  function removeMissing(img) {
+    const slide = img.closest('.slide');
+    const figure = img.closest('.more-figure');
+    const hero = img.closest('.hero-figure');
+    const card = img.closest('.exp-card');
+    if (slide) {
+      const fig = slide.closest('.project-figure');
+      slide.remove();
+      dropEmptyFigure(fig);
+    } else if (figure) {
+      const gallery = figure.closest('.more-gallery');
+      figure.remove();
+      dropEmptyGallery(gallery);
+    } else if (hero) {
+      hero.remove();
+    } else if (card) {
+      const track = card.parentElement;
+      card.remove(); // a catalog card with no cover photo has nothing to show
+      if (track && !track.querySelector('.exp-card')) {
+        const section = track.closest('section');
+        if (section) section.remove(); // no cards left, so the whole section has nothing to show
+      }
+    } else {
+      img.remove();
+    }
+  }
+  function pruneMissing(root) {
+    // Skip <img> tags with no src yet — e.g. the lightbox's own <img id="lb-img">,
+    // which is intentionally empty until a picture is clicked. Only an img that
+    // was actually pointed at a picture file can be "missing" one.
+    const imgs = Array.from(root.querySelectorAll('img')).filter(function (img) {
+      return !!img.getAttribute('src');
+    });
+    return Promise.all(imgs.map(function (img) {
+      return imgReady(img).then(function (ok) { if (!ok) removeMissing(img); });
+    }));
+  }
+
+  /* ---------- Swipeable picture carousels ---------- */
+  const ICON_PREV = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>';
+  const ICON_NEXT = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>';
+
+  function initCarousels() {
+  document.querySelectorAll('.project-figure').forEach(function (fig) {
+    const carousel = fig.querySelector('.carousel');
+    const track = fig.querySelector('.carousel-track');
+    const cap = fig.querySelector('figcaption');
+    if (!carousel || !track || !cap) return;
+
+    const slides = Array.from(track.querySelectorAll('.slide'));
+    const total = slides.length;
+    const title = fig.closest('.project').querySelector('h3').textContent.trim();
+    const fallbackCaption = cap.textContent.trim();
+
+    const capText = document.createElement('span');
+    cap.textContent = '';
+    cap.appendChild(capText);
+
+    carousel.setAttribute('role', 'region');
+    carousel.setAttribute('aria-roledescription', 'carousel');
+    carousel.setAttribute('aria-label', title + ' pictures');
+    slides.forEach(function (s, i) {
+      s.setAttribute('role', 'group');
+      s.setAttribute('aria-roledescription', 'slide');
+      s.setAttribute('aria-label', (i + 1) + ' of ' + total);
+    });
+
+    // Only one picture: nothing to swipe, so no arrows or dots.
+    if (total < 2) {
+      capText.textContent = (slides[0] && slides[0].dataset.caption) || fallbackCaption;
+      return;
+    }
+
+    fig.classList.add('multi');
+    track.tabIndex = 0; // lets keyboard users use the left/right arrow keys
+
+    let current = -1;
+
+    function goTo(i) {
+      i = Math.max(0, Math.min(total - 1, i));
+      track.scrollTo({ left: i * track.clientWidth, behavior: reduceMotion ? 'auto' : 'smooth' });
+    }
+
+    const dotsWrap = document.createElement('div');
+    dotsWrap.className = 'dots';
+    const dots = slides.map(function (_, i) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'dot';
+      b.setAttribute('aria-label', 'Show picture ' + (i + 1) + ' of ' + total);
+      b.addEventListener('click', function () { goTo(i); });
+      dotsWrap.appendChild(b);
+      return b;
+    });
+    cap.appendChild(dotsWrap);
+
+    function arrow(cls, icon, label, step) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'car-btn ' + cls;
+      b.setAttribute('aria-label', label);
+      b.innerHTML = icon;
+      b.addEventListener('click', function () { goTo(current + step); });
+      carousel.appendChild(b);
+      return b;
+    }
+    const prev = arrow('prev', ICON_PREV, 'Previous picture', -1);
+    const next = arrow('next', ICON_NEXT, 'Next picture', 1);
+
+    function show(i) {
+      if (i === current) return;
+      current = i;
+      capText.textContent = slides[i].dataset.caption || fallbackCaption;
+      dots.forEach(function (d, k) {
+        if (k === i) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current');
+      });
+      prev.disabled = i === 0;
+      next.disabled = i === total - 1;
+      slides.forEach(function (s, k) {          // pause a video once you swipe away from it
+        const v = s.querySelector('video');
+        if (v && k !== i) v.pause();
+      });
+    }
+
+    let ticking = false;
+    track.addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        ticking = false;
+        show(Math.max(0, Math.min(total - 1, Math.round(track.scrollLeft / track.clientWidth))));
+      });
+    }, { passive: true });
+
+    track.addEventListener('keydown', function (e) {
+      if (e.target !== track) return;
+      if (e.key === 'ArrowRight') { e.preventDefault(); goTo(current + 1); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(current - 1); }
+      else if (e.key === 'Enter' || e.key === ' ') {
+        const img = slides[current].querySelector('img');
+        if (img) { e.preventDefault(); openLightbox(img); }
+      }
+    });
+
+    window.addEventListener('resize', function () {
+      track.scrollTo({ left: current * track.clientWidth, behavior: 'auto' });
+    });
+
+    show(0);
+  });
+  }
+
+  /* ---------- Extra Experience row (swipe/drag + arrows) ---------- */
+  function initExpRow() {
+  document.querySelectorAll('.exp-row').forEach(function (row) {
+    const track = row.querySelector('.exp-track');
+    if (!track) return;
+    const cards = Array.from(track.querySelectorAll('.exp-card'));
+    if (!cards.length) return;
+
+    track.tabIndex = 0; // lets keyboard users use the left/right arrow keys
+
+    function step() {
+      return (cards[0].getBoundingClientRect().width || track.clientWidth) + 24; // card width + gap
+    }
+
+    function updateButtons() {
+      const max = track.scrollWidth - track.clientWidth - 1;
+      prevBtn.disabled = track.scrollLeft <= 0;
+      nextBtn.disabled = track.scrollLeft >= max;
+    }
+
+    function arrow(cls, icon, label, dir) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'car-btn ' + cls;
+      b.setAttribute('aria-label', label);
+      b.innerHTML = icon;
+      b.addEventListener('click', function () {
+        track.scrollBy({ left: dir * step(), behavior: reduceMotion ? 'auto' : 'smooth' });
+      });
+      row.appendChild(b);
+      return b;
+    }
+    const prevBtn = arrow('prev', ICON_PREV, 'Previous experience', -1);
+    const nextBtn = arrow('next', ICON_NEXT, 'Next experience', 1);
+
+    let ticking = false;
+    track.addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () { ticking = false; updateButtons(); });
+    }, { passive: true });
+
+    track.addEventListener('keydown', function (e) {
+      if (e.target !== track) return;
+      if (e.key === 'ArrowRight') { e.preventDefault(); track.scrollBy({ left: step(), behavior: reduceMotion ? 'auto' : 'smooth' }); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); track.scrollBy({ left: -step(), behavior: reduceMotion ? 'auto' : 'smooth' }); }
+    });
+
+    window.addEventListener('resize', updateButtons);
+    updateButtons();
+  });
+  }
+
+  /* ---------- Read More pop-up ---------- */
+  const modal = document.getElementById('project-modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalBody = document.getElementById('modal-body');
+  const closeBtn = modal.querySelector('.window-close');
+  const reportTab = document.getElementById('modal-report-tab');
+
+  function openProject(project) {
+    const tpl = project.querySelector('template.more');
+    modalTitle.textContent = project.querySelector('h3').textContent.trim();
+    modalBody.replaceChildren();
+    // Projects that have a data-report path get a second tab to download that file.
+    const reportHref = project.dataset.report;
+    if (reportHref) {
+      reportTab.href = reportHref;
+      reportTab.setAttribute('download', project.dataset.reportName || '');
+      reportTab.style.display = 'flex';
+    } else {
+      reportTab.style.display = 'none';
+      reportTab.removeAttribute('download');
+    }
+    if (tpl) {
+      modalBody.appendChild(tpl.content.cloneNode(true));
+    } else {
+      const p = project.querySelector('.project-body p'); // no <template>? fall back to the card text
+      if (p) modalBody.appendChild(p.cloneNode(true));
+    }
+    pruneMissing(modalBody).then(function () { makeZoomable(modalBody); });
+    document.documentElement.classList.add('modal-open');
+    if (typeof modal.showModal === 'function') modal.showModal();
+    else modal.setAttribute('open', '');
+    modalBody.scrollTop = 0;
+  }
+
+  function initReadMore() {
+  document.querySelectorAll('.project .read-more').forEach(function (btn) {
+    btn.addEventListener('click', function () { openProject(btn.closest('.project')); });
+  });
+
+  document.querySelectorAll('.exp-cover').forEach(function (btn) {
+    btn.addEventListener('click', function () { openProject(btn.closest('.exp-card')); });
+  });
+  }
+
+  function closeModal() {
+    if (typeof modal.close === 'function') modal.close();
+    else modal.removeAttribute('open');
+  }
+  closeBtn.addEventListener('click', closeModal);
+
+  // Click on the dimmed area outside the window closes it too
+  let pressedOnBackdrop = false;
+  modal.addEventListener('pointerdown', function (e) { pressedOnBackdrop = e.target === modal; });
+  modal.addEventListener('click', function (e) {
+    if (e.target === modal && pressedOnBackdrop) closeModal();
+  });
+
+  // Runs for the X, the Esc key, and backdrop clicks
+  modal.addEventListener('close', function () {
+    document.documentElement.classList.remove('modal-open');
+    modalBody.replaceChildren(); // also stops any video playing inside
+  });
+
+  /* ---------- Click a picture to enlarge it ---------- */
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lb-img');
+  const lbCaption = document.getElementById('lb-caption');
+  const lbCount = document.getElementById('lb-count');
+  const lbPrev = lb.querySelector('.lb-nav.prev');
+  const lbNext = lb.querySelector('.lb-nav.next');
+  let lbItems = [];
+  let lbIndex = 0;
+
+  // Gather the pictures that belong together (same carousel / same pop-up) so you can step through them
+  function figureCaption(img) {
+    const fig = img.closest('figure');
+    const c = fig && fig.querySelector('figcaption');
+    return c ? c.textContent.trim() : '';
+  }
+  function collect(img) {
+    let imgs, captionOf;
+    const slide = img.closest('.slide');
+    if (slide) {
+      imgs = Array.from(slide.parentElement.querySelectorAll('.slide img'));
+      captionOf = function (i) { return i.closest('.slide').dataset.caption || ''; };
+    } else if (img.closest('.more-figure')) {
+      imgs = Array.from(img.closest('.window-body').querySelectorAll('.more-figure img'));
+      captionOf = figureCaption;
+    } else {
+      imgs = [img];
+      captionOf = figureCaption;
+    }
+    return {
+      index: imgs.indexOf(img),
+      items: imgs.map(function (i) {
+        return { src: i.currentSrc || i.src, alt: i.alt, caption: captionOf(i) };
+      })
+    };
+  }
+
+  function lbShow(i) {
+    lbIndex = Math.max(0, Math.min(lbItems.length - 1, i));
+    const it = lbItems[lbIndex];
+    const many = lbItems.length > 1;
+    lbImg.src = it.src;
+    lbImg.alt = it.alt;
+    lbCaption.textContent = it.caption;
+    lbCount.textContent = many ? (lbIndex + 1) + ' / ' + lbItems.length : '';
+    lb.classList.toggle('single', !many);
+    lbPrev.disabled = lbIndex === 0;
+    lbNext.disabled = lbIndex === lbItems.length - 1;
+  }
+
+  function openLightbox(img) {
+    const found = collect(img);
+    lbItems = found.items;
+    lbShow(found.index);
+    document.documentElement.classList.add('lb-open');
+    if (typeof lb.showModal === 'function') lb.showModal();
+    else lb.setAttribute('open', '');
+  }
+
+  // Click / tap any project picture, pop-up picture, or the top photo
+  document.addEventListener('click', function (e) {
+    const img = e.target.closest && e.target.closest('.slide img, .more-figure img, .hero-figure img');
+    if (img) openLightbox(img);
+  });
+
+  // Keyboard: pop-up pictures and the top photo become focusable buttons (Enter or Space to enlarge)
+  function makeZoomable(root) {
+    root.querySelectorAll('.more-figure img, .hero-figure img').forEach(function (img) {
+      img.tabIndex = 0;
+      img.setAttribute('role', 'button');
+      img.setAttribute('aria-label', 'Enlarge picture' + (img.alt ? ': ' + img.alt : ''));
+      img.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(img); }
+      });
+    });
+  }
+
+  function closeLightbox() {
+    if (typeof lb.close === 'function') lb.close();
+    else lb.removeAttribute('open');
+  }
+  lb.querySelector('.lb-close').addEventListener('click', closeLightbox);
+  lbPrev.addEventListener('click', function () { lbShow(lbIndex - 1); });
+  lbNext.addEventListener('click', function () { lbShow(lbIndex + 1); });
+
+  // Click on the dark area (anywhere that isn't the picture or a control) closes it
+  lb.addEventListener('click', function (e) {
+    if (!e.target.closest('#lb-img, .lb-nav, .lb-close, .lb-bar')) closeLightbox();
+  });
+
+  lb.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { e.preventDefault(); lbShow(lbIndex + 1); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); lbShow(lbIndex - 1); }
+  });
+
+  // Swipe left / right to move between pictures on touch screens
+  let touchX = 0, touchY = 0;
+  lb.addEventListener('touchstart', function (e) {
+    touchX = e.changedTouches[0].clientX;
+    touchY = e.changedTouches[0].clientY;
+  }, { passive: true });
+  lb.addEventListener('touchend', function (e) {
+    const dx = e.changedTouches[0].clientX - touchX;
+    const dy = e.changedTouches[0].clientY - touchY;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) lbShow(lbIndex + (dx < 0 ? 1 : -1));
+  }, { passive: true });
+
+  // Runs for the X, the Esc key, and backdrop clicks. The pop-up underneath (if any) stays open.
+  lb.addEventListener('close', function () {
+    document.documentElement.classList.remove('lb-open');
+    lbImg.removeAttribute('src');
+  });
+
+  /* Close up any picture slots whose file can't be found, then wire up everything
+     that depends on the final (pruned) set of slides, galleries and cards. */
+  pruneMissing(document).then(function () {
+    initCarousels();
+    initExpRow();
+    initReadMore();
+    makeZoomable(document);
+  });
+})();
+</script>
+
+</body>
+</html>
